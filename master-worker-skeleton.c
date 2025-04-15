@@ -20,7 +20,7 @@ void print_produced(int num, int master) {
 void print_consumed(int num, int worker) {
 
   printf("Consumed %d by worker %d\n", num, worker);
-  
+
 }
 
 
@@ -31,16 +31,16 @@ void *generate_requests_loop(void *data)
   int thread_id = *((int *)data);
 
   while(1)
-    {
+  {
 
-      if(item_to_produce >= total_items) {
-	break;
-      }
- 
-      buffer[curr_buf_size++] = item_to_produce;
-      print_produced(item_to_produce, thread_id);
-      item_to_produce++;
+    if(item_to_produce >= total_items) {
+      break;
     }
+
+    buffer[curr_buf_size++] = item_to_produce;
+    print_produced(item_to_produce, thread_id);
+    item_to_produce++;
+  }
   return 0;
 }
 
@@ -53,10 +53,10 @@ int main(int argc, char *argv[])
   pthread_t *master_thread;
   item_to_produce = 0;
   curr_buf_size = 0;
-  
+
   int i;
-  
-   if (argc < 5) {
+
+  if (argc < 5) {
     printf("./master-worker #total_items #max_buf_size #num_workers #masters e.g. ./exe 10000 1000 4 3\n");
     exit(1);
   }
@@ -66,33 +66,33 @@ int main(int argc, char *argv[])
     total_items = atoi(argv[1]);
     max_buf_size = atoi(argv[2]);
   }
-    
 
-   buffer = (int *)malloc (sizeof(int) * max_buf_size);
 
-   //create master producer threads
-   master_thread_id = (int *)malloc(sizeof(int) * num_masters);
-   master_thread = (pthread_t *)malloc(sizeof(pthread_t) * num_masters);
+  buffer = (int *)malloc (sizeof(int) * max_buf_size);
+
+  //create master producer threads
+  master_thread_id = (int *)malloc(sizeof(int) * num_masters);
+  master_thread = (pthread_t *)malloc(sizeof(pthread_t) * num_masters);
   for (i = 0; i < num_masters; i++)
     master_thread_id[i] = i;
 
   for (i = 0; i < num_masters; i++)
     pthread_create(&master_thread[i], NULL, generate_requests_loop, (void *)&master_thread_id[i]);
-  
+
   //create worker consumer threads
 
-  
+
   //wait for all threads to complete
   for (i = 0; i < num_masters; i++)
-    {
-      pthread_join(master_thread[i], NULL);
-      printf("master %d joined\n", i);
-    }
-  
+  {
+    pthread_join(master_thread[i], NULL);
+    printf("master %d joined\n", i);
+  }
+
   /*----Deallocating Buffers---------------------*/
   free(buffer);
   free(master_thread_id);
   free(master_thread);
-  
+
   return 0;
 }
