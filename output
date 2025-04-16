@@ -1,1 +1,630 @@
-./master-worker #total_items #max_buf_size #num_workers #masters e.g. ./exe 10000 1000 4 3
+Produced 0 by master 0
+Produced 1 by master 0
+Produced 2 by master 0
+Produced 3 by master 0
+Produced 4 by master 0
+Produced 5 by master 0
+Produced 6 by master 0
+Produced 7 by master 0
+Produced 8 by master 0
+Produced 9 by master 0
+Produced 10 by master 0
+Produced 11 by master 0
+Produced 12 by master 0
+Produced 13 by master 0
+Produced 14 by master 0
+Produced 15 by master 3
+Produced 16 by master 1
+Produced 17 by master 1
+Produced 18 by master 1
+Produced 19 by master 1
+Produced 20 by master 1
+Produced 21 by master 2
+Produced 22 by master 1
+Produced 23 by master 2
+Produced 24 by master 2
+Produced 25 by master 2
+Produced 26 by master 2
+Produced 27 by master 2
+Produced 28 by master 2
+Produced 29 by master 2
+Produced 30 by master 2
+Produced 31 by master 2
+Produced 32 by master 2
+Produced 33 by master 2
+Produced 34 by master 2
+Produced 35 by master 2
+Produced 36 by master 0
+Produced 37 by master 0
+Produced 38 by master 0
+Produced 39 by master 0
+Produced 40 by master 0
+Produced 41 by master 0
+Produced 42 by master 4
+Produced 43 by master 4
+Produced 44 by master 4
+Produced 45 by master 4
+Produced 46 by master 4
+Produced 47 by master 4
+Produced 48 by master 4
+Produced 49 by master 1
+Produced 50 by master 1
+Produced 51 by master 4
+Produced 52 by master 4
+Produced 53 by master 4
+Produced 54 by master 0
+Produced 55 by master 0
+Produced 56 by master 4
+Produced 57 by master 4
+Produced 58 by master 0
+Produced 59 by master 4
+Produced 60 by master 4
+Produced 61 by master 0
+Produced 62 by master 3
+Produced 63 by master 3
+Produced 64 by master 3
+Produced 65 by master 3
+Produced 66 by master 3
+Produced 67 by master 3
+Produced 68 by master 0
+Produced 69 by master 0
+Produced 70 by master 3
+Produced 71 by master 0
+Produced 72 by master 0
+Produced 73 by master 3
+Produced 74 by master 2
+Produced 75 by master 3
+Produced 76 by master 3
+Produced 77 by master 3
+Produced 78 by master 3
+Produced 79 by master 3
+Produced 80 by master 3
+Produced 81 by master 3
+Produced 82 by master 3
+Produced 83 by master 3
+Produced 84 by master 3
+Produced 85 by master 3
+Produced 86 by master 2
+Produced 87 by master 2
+Produced 88 by master 3
+Produced 89 by master 2
+Produced 90 by master 4
+Produced 91 by master 4
+Produced 92 by master 4
+Produced 93 by master 2
+Produced 94 by master 4
+Produced 95 by master 3
+Produced 96 by master 3
+Produced 97 by master 3
+Produced 98 by master 3
+Produced 99 by master 4
+Consumed 99 by worker 0
+Consumed 98 by worker 0
+Consumed 97 by worker 0
+Consumed 96 by worker 0
+Consumed 95 by worker 0
+Consumed 94 by worker 0
+Consumed 93 by worker 0
+Consumed 92 by worker 0
+Consumed 91 by worker 0
+Consumed 90 by worker 0
+Consumed 89 by worker 0
+Consumed 88 by worker 0
+Consumed 87 by worker 0
+Consumed 86 by worker 0
+Consumed 85 by worker 0
+Consumed 84 by worker 0
+Consumed 83 by worker 0
+Consumed 82 by worker 0
+Consumed 81 by worker 0
+Consumed 80 by worker 0
+Consumed 79 by worker 0
+Consumed 78 by worker 0
+Consumed 77 by worker 0
+Consumed 76 by worker 0
+Consumed 75 by worker 0
+Consumed 74 by worker 0
+Consumed 73 by worker 0
+Consumed 72 by worker 0
+Consumed 71 by worker 0
+Consumed 70 by worker 0
+Consumed 69 by worker 0
+Consumed 68 by worker 0
+Consumed 67 by worker 0
+Consumed 66 by worker 0
+Consumed 65 by worker 0
+Consumed 64 by worker 0
+Consumed 63 by worker 0
+Consumed 62 by worker 0
+Consumed 61 by worker 0
+Consumed 60 by worker 0
+Consumed 59 by worker 0
+Consumed 58 by worker 0
+Consumed 57 by worker 0
+Consumed 56 by worker 0
+Consumed 55 by worker 0
+Consumed 54 by worker 0
+Consumed 53 by worker 0
+Consumed 52 by worker 0
+Consumed 51 by worker 0
+Consumed 50 by worker 0
+Consumed 49 by worker 0
+Consumed 48 by worker 0
+Consumed 47 by worker 0
+Consumed 46 by worker 0
+Consumed 45 by worker 0
+Consumed 44 by worker 0
+Consumed 43 by worker 0
+Consumed 42 by worker 0
+Consumed 41 by worker 0
+Consumed 40 by worker 0
+Consumed 39 by worker 0
+Consumed 38 by worker 0
+Consumed 37 by worker 0
+Consumed 36 by worker 0
+Consumed 35 by worker 3
+Consumed 34 by worker 3
+Consumed 33 by worker 3
+Consumed 32 by worker 3
+Consumed 31 by worker 3
+Consumed 30 by worker 3
+Consumed 29 by worker 3
+Consumed 28 by worker 3
+Consumed 27 by worker 3
+Consumed 26 by worker 10
+Consumed 25 by worker 3
+Consumed 24 by worker 3
+Consumed 23 by worker 10
+Consumed 22 by worker 3
+Consumed 21 by worker 10
+Consumed 20 by worker 3
+Consumed 19 by worker 10
+Consumed 18 by worker 3
+Consumed 17 by worker 3
+Consumed 16 by worker 3
+Consumed 15 by worker 3
+Consumed 14 by worker 3
+Consumed 13 by worker 3
+Consumed 12 by worker 3
+Consumed 11 by worker 3
+Consumed 10 by worker 3
+Consumed 9 by worker 3
+Consumed 8 by worker 2
+Consumed 7 by worker 2
+Consumed 6 by worker 2
+Consumed 5 by worker 2
+Consumed 4 by worker 2
+Consumed 3 by worker 2
+Consumed 2 by worker 2
+Consumed 1 by worker 2
+Consumed 0 by worker 5
+master 0 joined
+master 1 joined
+master 2 joined
+master 3 joined
+master 4 joined
+master 5 joined
+master 6 joined
+master 7 joined
+master 8 joined
+master 9 joined
+master 10 joined
+master 11 joined
+master 12 joined
+master 13 joined
+master 14 joined
+master 15 joined
+master 16 joined
+master 17 joined
+master 18 joined
+master 19 joined
+master 20 joined
+master 21 joined
+master 22 joined
+master 23 joined
+master 24 joined
+master 25 joined
+master 26 joined
+master 27 joined
+master 28 joined
+master 29 joined
+consumer 0 joined
+consumer 1 joined
+consumer 2 joined
+consumer 3 joined
+consumer 4 joined
+consumer 5 joined
+consumer 6 joined
+consumer 7 joined
+consumer 8 joined
+consumer 9 joined
+consumer 10 joined
+consumer 11 joined
+consumer 12 joined
+consumer 13 joined
+consumer 14 joined
+consumer 15 joined
+consumer 16 joined
+consumer 17 joined
+consumer 18 joined
+consumer 19 joined
+consumer 20 joined
+consumer 21 joined
+consumer 22 joined
+consumer 23 joined
+consumer 24 joined
+consumer 25 joined
+consumer 26 joined
+consumer 27 joined
+consumer 28 joined
+consumer 29 joined
+consumer 30 joined
+consumer 31 joined
+consumer 32 joined
+consumer 33 joined
+consumer 34 joined
+consumer 35 joined
+consumer 36 joined
+consumer 37 joined
+consumer 38 joined
+consumer 39 joined
+consumer 40 joined
+consumer 41 joined
+consumer 42 joined
+consumer 43 joined
+consumer 44 joined
+consumer 45 joined
+consumer 46 joined
+consumer 47 joined
+consumer 48 joined
+consumer 49 joined
+consumer 50 joined
+consumer 51 joined
+consumer 52 joined
+consumer 53 joined
+consumer 54 joined
+consumer 55 joined
+consumer 56 joined
+consumer 57 joined
+consumer 58 joined
+consumer 59 joined
+consumer 60 joined
+consumer 61 joined
+consumer 62 joined
+consumer 63 joined
+consumer 64 joined
+consumer 65 joined
+consumer 66 joined
+consumer 67 joined
+consumer 68 joined
+consumer 69 joined
+consumer 70 joined
+consumer 71 joined
+consumer 72 joined
+consumer 73 joined
+consumer 74 joined
+consumer 75 joined
+consumer 76 joined
+consumer 77 joined
+consumer 78 joined
+consumer 79 joined
+consumer 80 joined
+consumer 81 joined
+consumer 82 joined
+consumer 83 joined
+consumer 84 joined
+consumer 85 joined
+consumer 86 joined
+consumer 87 joined
+consumer 88 joined
+consumer 89 joined
+consumer 90 joined
+consumer 91 joined
+consumer 92 joined
+consumer 93 joined
+consumer 94 joined
+consumer 95 joined
+consumer 96 joined
+consumer 97 joined
+consumer 98 joined
+consumer 99 joined
+consumer 100 joined
+consumer 101 joined
+consumer 102 joined
+consumer 103 joined
+consumer 104 joined
+consumer 105 joined
+consumer 106 joined
+consumer 107 joined
+consumer 108 joined
+consumer 109 joined
+consumer 110 joined
+consumer 111 joined
+consumer 112 joined
+consumer 113 joined
+consumer 114 joined
+consumer 115 joined
+consumer 116 joined
+consumer 117 joined
+consumer 118 joined
+consumer 119 joined
+consumer 120 joined
+consumer 121 joined
+consumer 122 joined
+consumer 123 joined
+consumer 124 joined
+consumer 125 joined
+consumer 126 joined
+consumer 127 joined
+consumer 128 joined
+consumer 129 joined
+consumer 130 joined
+consumer 131 joined
+consumer 132 joined
+consumer 133 joined
+consumer 134 joined
+consumer 135 joined
+consumer 136 joined
+consumer 137 joined
+consumer 138 joined
+consumer 139 joined
+consumer 140 joined
+consumer 141 joined
+consumer 142 joined
+consumer 143 joined
+consumer 144 joined
+consumer 145 joined
+consumer 146 joined
+consumer 147 joined
+consumer 148 joined
+consumer 149 joined
+consumer 150 joined
+consumer 151 joined
+consumer 152 joined
+consumer 153 joined
+consumer 154 joined
+consumer 155 joined
+consumer 156 joined
+consumer 157 joined
+consumer 158 joined
+consumer 159 joined
+consumer 160 joined
+consumer 161 joined
+consumer 162 joined
+consumer 163 joined
+consumer 164 joined
+consumer 165 joined
+consumer 166 joined
+consumer 167 joined
+consumer 168 joined
+consumer 169 joined
+consumer 170 joined
+consumer 171 joined
+consumer 172 joined
+consumer 173 joined
+consumer 174 joined
+consumer 175 joined
+consumer 176 joined
+consumer 177 joined
+consumer 178 joined
+consumer 179 joined
+consumer 180 joined
+consumer 181 joined
+consumer 182 joined
+consumer 183 joined
+consumer 184 joined
+consumer 185 joined
+consumer 186 joined
+consumer 187 joined
+consumer 188 joined
+consumer 189 joined
+consumer 190 joined
+consumer 191 joined
+consumer 192 joined
+consumer 193 joined
+consumer 194 joined
+consumer 195 joined
+consumer 196 joined
+consumer 197 joined
+consumer 198 joined
+consumer 199 joined
+consumer 200 joined
+consumer 201 joined
+consumer 202 joined
+consumer 203 joined
+consumer 204 joined
+consumer 205 joined
+consumer 206 joined
+consumer 207 joined
+consumer 208 joined
+consumer 209 joined
+consumer 210 joined
+consumer 211 joined
+consumer 212 joined
+consumer 213 joined
+consumer 214 joined
+consumer 215 joined
+consumer 216 joined
+consumer 217 joined
+consumer 218 joined
+consumer 219 joined
+consumer 220 joined
+consumer 221 joined
+consumer 222 joined
+consumer 223 joined
+consumer 224 joined
+consumer 225 joined
+consumer 226 joined
+consumer 227 joined
+consumer 228 joined
+consumer 229 joined
+consumer 230 joined
+consumer 231 joined
+consumer 232 joined
+consumer 233 joined
+consumer 234 joined
+consumer 235 joined
+consumer 236 joined
+consumer 237 joined
+consumer 238 joined
+consumer 239 joined
+consumer 240 joined
+consumer 241 joined
+consumer 242 joined
+consumer 243 joined
+consumer 244 joined
+consumer 245 joined
+consumer 246 joined
+consumer 247 joined
+consumer 248 joined
+consumer 249 joined
+consumer 250 joined
+consumer 251 joined
+consumer 252 joined
+consumer 253 joined
+consumer 254 joined
+consumer 255 joined
+consumer 256 joined
+consumer 257 joined
+consumer 258 joined
+consumer 259 joined
+consumer 260 joined
+consumer 261 joined
+consumer 262 joined
+consumer 263 joined
+consumer 264 joined
+consumer 265 joined
+consumer 266 joined
+consumer 267 joined
+consumer 268 joined
+consumer 269 joined
+consumer 270 joined
+consumer 271 joined
+consumer 272 joined
+consumer 273 joined
+consumer 274 joined
+consumer 275 joined
+consumer 276 joined
+consumer 277 joined
+consumer 278 joined
+consumer 279 joined
+consumer 280 joined
+consumer 281 joined
+consumer 282 joined
+consumer 283 joined
+consumer 284 joined
+consumer 285 joined
+consumer 286 joined
+consumer 287 joined
+consumer 288 joined
+consumer 289 joined
+consumer 290 joined
+consumer 291 joined
+consumer 292 joined
+consumer 293 joined
+consumer 294 joined
+consumer 295 joined
+consumer 296 joined
+consumer 297 joined
+consumer 298 joined
+consumer 299 joined
+consumer 300 joined
+consumer 301 joined
+consumer 302 joined
+consumer 303 joined
+consumer 304 joined
+consumer 305 joined
+consumer 306 joined
+consumer 307 joined
+consumer 308 joined
+consumer 309 joined
+consumer 310 joined
+consumer 311 joined
+consumer 312 joined
+consumer 313 joined
+consumer 314 joined
+consumer 315 joined
+consumer 316 joined
+consumer 317 joined
+consumer 318 joined
+consumer 319 joined
+consumer 320 joined
+consumer 321 joined
+consumer 322 joined
+consumer 323 joined
+consumer 324 joined
+consumer 325 joined
+consumer 326 joined
+consumer 327 joined
+consumer 328 joined
+consumer 329 joined
+consumer 330 joined
+consumer 331 joined
+consumer 332 joined
+consumer 333 joined
+consumer 334 joined
+consumer 335 joined
+consumer 336 joined
+consumer 337 joined
+consumer 338 joined
+consumer 339 joined
+consumer 340 joined
+consumer 341 joined
+consumer 342 joined
+consumer 343 joined
+consumer 344 joined
+consumer 345 joined
+consumer 346 joined
+consumer 347 joined
+consumer 348 joined
+consumer 349 joined
+consumer 350 joined
+consumer 351 joined
+consumer 352 joined
+consumer 353 joined
+consumer 354 joined
+consumer 355 joined
+consumer 356 joined
+consumer 357 joined
+consumer 358 joined
+consumer 359 joined
+consumer 360 joined
+consumer 361 joined
+consumer 362 joined
+consumer 363 joined
+consumer 364 joined
+consumer 365 joined
+consumer 366 joined
+consumer 367 joined
+consumer 368 joined
+consumer 369 joined
+consumer 370 joined
+consumer 371 joined
+consumer 372 joined
+consumer 373 joined
+consumer 374 joined
+consumer 375 joined
+consumer 376 joined
+consumer 377 joined
+consumer 378 joined
+consumer 379 joined
+consumer 380 joined
+consumer 381 joined
+consumer 382 joined
+consumer 383 joined
+consumer 384 joined
+consumer 385 joined
+consumer 386 joined
+consumer 387 joined
+consumer 388 joined
+consumer 389 joined
+consumer 390 joined
+consumer 391 joined
+consumer 392 joined
+consumer 393 joined
+consumer 394 joined
+consumer 395 joined
+consumer 396 joined
+consumer 397 joined
+consumer 398 joined
+consumer 399 joined
