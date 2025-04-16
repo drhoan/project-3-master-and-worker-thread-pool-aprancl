@@ -1,0 +1,1 @@
+./master-worker #total_items #max_buf_size #num_workers #masters e.g. ./exe 10000 1000 4 3
