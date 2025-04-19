@@ -90,10 +90,10 @@ void *consumer_request_loop(void *data)
 
 int main(int argc, char *argv[])
 {
-    int *master_thread_id;
-    pthread_t *master_thread;
-    int *consumer_thread_id;
-    pthread_t *consumer_thread;
+    int *master_thread_ids;
+    pthread_t *master_threads;
+    int *consumer_thread_ids;
+    pthread_t *consumer_threads;
     item_to_produce = 0;
     item_to_consume = 0;
     curr_buf_size = 0;
@@ -118,44 +118,44 @@ int main(int argc, char *argv[])
     buffer = (int *)malloc (sizeof(int) * max_buf_size);
 
     //create master producer threads
-    master_thread_id = (int *)malloc(sizeof(int) * num_masters);
-    master_thread = (pthread_t *)malloc(sizeof(pthread_t) * num_masters);
+    master_t./test-master-worker.sh 100 100 100 100hread_ids = (int *)malloc(sizeof(int) * num_masters);
+    master_threads = (pthread_t *)malloc(sizeof(pthread_t) * num_masters);
     for (i = 0; i < num_masters; i++)
-        master_thread_id[i] = i;
+        master_thread_ids[i] = i;
 
     for (i = 0; i < num_masters; i++)
-        pthread_create(&master_thread[i], NULL, generate_requests_loop, (void *)&master_thread_id[i]);
+        pthread_create(&master_threads[i], NULL, generate_requests_loop, (void *)&master_thread_ids[i]);
 
     //create worker consumer threads
-    consumer_thread_id = (int *)malloc(sizeof(int) * num_workers);
-    consumer_thread = (pthread_t *)malloc(sizeof(pthread_t) * num_workers);
+    consumer_thread_ids = (int *)malloc(sizeof(int) * num_workers);
+    consumer_threads = (pthread_t *)malloc(sizeof(pthread_t) * num_workers);
     for (i = 0; i < num_workers; i++)
-        consumer_thread_id[i] = i;
+        consumer_thread_ids[i] = i;
 
     for (i = 0; i < num_workers; i++)
-        pthread_create(&consumer_thread[i], NULL, consumer_request_loop, (void *)&consumer_thread_id[i]);
+        pthread_create(&consumer_threads[i], NULL, consumer_request_loop, (void *)&consumer_thread_ids[i]);
 
 
     //wait for all threads to complete
     for (i = 0; i < num_masters; i++)
     {
-        pthread_join(master_thread[i], NULL);
+        pthread_join(master_threads[i], NULL);
         printf("master %d joined\n", i);
     }
 
     // wait for all worker threads to complete
     for (i = 0; i < num_workers; i++)
     {
-        pthread_join(consumer_thread[i], NULL);
+        pthread_join(consumer_threads[i], NULL);
         printf("consumer %d joined\n", i);
     }
 
     /*----Deallocating Buffers---------------------*/
     free(buffer);
-    free(master_thread_id);
-    free(master_thread);
-    free(consumer_thread_id);
-    free(consumer_thread);
+    free(master_thread_ids);
+    free(master_threads);
+    free(consumer_thread_ids);
+    free(consumer_threads);
 
     return 0;
 }

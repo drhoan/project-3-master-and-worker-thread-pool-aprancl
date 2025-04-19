@@ -4,7 +4,7 @@
 #include <string.h>
 #include <errno.h>
 #include <signal.h>
-#include <wait.h>
+// #include <wait.h>
 #include <pthread.h>
 
 int item_to_produce, curr_buf_size;
