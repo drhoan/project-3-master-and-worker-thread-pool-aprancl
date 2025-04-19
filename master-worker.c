@@ -1,21 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
-#include <string.h>
-#include <errno.h>
-#include <signal.h>
-// #include <wait.h>
 #include <pthread.h>
+#include <unistd.h>
 
-int item_to_produce, curr_buf_size, item_to_consume;
-int total_items, max_buf_size, num_workers, num_masters;
+int BUFFER_SIZE;
+int NUM_PRODUCERS;
+int NUM_CONSUMERS;
+int TOTAL_ITEMS_TO_PRODUCE;
 
+// Shared buffer
+int* buffer; // this shall be a circular array
+int count = 0; // Number of items in buffer
+int in = 0;    // Points to the next free position
+int out = 0;   // Points to the next item to consume
+int cur_item = 0;
+
+// Synchronization variables
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t not_empty = PTHREAD_COND_INITIALIZER;
 pthread_cond_t not_full = PTHREAD_COND_INITIALIZER;
-
-int *buffer;
-int BUFFER_SIZE;
 
 void print_produced(int num, int master) {
     printf("Produced %d by master %d\n", num, master);
@@ -25,137 +28,132 @@ void print_consumed(int num, int worker) {
     printf("Consumed %d by worker %d\n", num, worker);
 }
 
+void* produce_requests_loop(void* data) {
+    int thread_id = *((int*)data);
 
-//produce items and place in buffer
-//modify code below to synchronize correctly
-void *generate_requests_loop(void *data)
-{
-    int thread_id = *((int *)data);
-
-    while (1)
-    {
+    while (1) {
         pthread_mutex_lock(&mutex);
 
-        if (item_to_produce >= total_items)
-        {
+        // Check termination condition
+        if (cur_item >= TOTAL_ITEMS_TO_PRODUCE) {
+            // Signal all consumers to wake up and check termination
+            pthread_cond_broadcast(&not_empty);
             pthread_mutex_unlock(&mutex);
             break;
         }
 
-        while (curr_buf_size >= max_buf_size)
-        {
+        // Wait if buffer is full
+        while (count == BUFFER_SIZE && cur_item < TOTAL_ITEMS_TO_PRODUCE) {
             pthread_cond_wait(&not_full, &mutex);
         }
 
-        buffer[curr_buf_size++] = item_to_produce;
-        print_produced(item_to_produce, thread_id);
-        item_to_produce++;
-
-        pthread_cond_signal(&not_empty);
-        pthread_mutex_unlock(&mutex);
-    }
-
-    return 0;
-}
-
-void *consumer_request_loop(void *data)
-{
-    int thread_id = *((int *)data);
-
-    while (1)
-    {
-        pthread_mutex_lock(&mutex);
-
-        while (curr_buf_size <= 0 && item_to_consume < total_items)
-        {
-            pthread_cond_wait(&not_empty, &mutex);
-        }
-
-        if (item_to_consume >= total_items)
-        {
+        // Double-check termination after waking up
+        if (cur_item >= TOTAL_ITEMS_TO_PRODUCE) {
+            pthread_cond_broadcast(&not_empty);
             pthread_mutex_unlock(&mutex);
             break;
         }
 
-        int consumed_item = buffer[--curr_buf_size];
-        print_consumed(consumed_item, thread_id);
-        item_to_consume++;
+        // Add item to buffer
+        buffer[in] = cur_item;
+        print_produced(cur_item, thread_id);
+        cur_item++;
+        in = (in + 1) % BUFFER_SIZE;
+        count++;
 
-        pthread_cond_signal(&not_full);
+        // Signal consumers that buffer is not empty
+        pthread_cond_broadcast(&not_empty);
         pthread_mutex_unlock(&mutex);
     }
-
-    return 0;
+    return NULL;
 }
 
-int main(int argc, char *argv[])
-{
-    int *master_thread_ids;
-    pthread_t *master_threads;
-    int *consumer_thread_ids;
-    pthread_t *consumer_threads;
-    item_to_produce = 0;
-    item_to_consume = 0;
-    curr_buf_size = 0;
+void* consume_requests_loop(void* data) {
+    int thread_id = *((int*)data);
 
+    while (1) {
+        pthread_mutex_lock(&mutex);
 
+        // Check termination condition
+        if (cur_item >= TOTAL_ITEMS_TO_PRODUCE && count == 0) {
+            // Signal all producers and consumers to wake up and check termination
+            pthread_cond_broadcast(&not_full);
+            pthread_cond_broadcast(&not_empty);
+            pthread_mutex_unlock(&mutex);
+            break;
+        }
 
-    int i;
+        // Wait if buffer is empty
+        while (count == 0 && cur_item < TOTAL_ITEMS_TO_PRODUCE) {
+            pthread_cond_wait(&not_empty, &mutex);
+        }
 
+        // Double-check termination after waking up
+        if (cur_item >= TOTAL_ITEMS_TO_PRODUCE && count == 0) {
+            pthread_cond_broadcast(&not_full);
+            // pthread_cond_broadcast(&not_empty);
+            pthread_mutex_unlock(&mutex);
+            break;
+        }
+
+        // Consume item from buffer
+        int item = buffer[out];
+        print_consumed(item, thread_id);
+        out = (out + 1) % BUFFER_SIZE;
+        count--;
+
+        // Signal producers that buffer is not full
+        pthread_cond_broadcast(&not_full);
+        pthread_mutex_unlock(&mutex);
+    }
+    return NULL;
+}
+
+int main(int argc, char* argv[]) {
     if (argc < 5) {
         printf("./master-worker #total_items #max_buf_size #num_workers #masters e.g. ./exe 10000 1000 4 3\n");
         exit(1);
+    } else {
+        NUM_PRODUCERS = atoi(argv[4]);
+        NUM_CONSUMERS = atoi(argv[3]);
+        TOTAL_ITEMS_TO_PRODUCE = atoi(argv[1]);
+        BUFFER_SIZE = atoi(argv[2]);
     }
-    else {
-        num_masters = atoi(argv[4]);
-        num_workers = atoi(argv[3]);
-        total_items = atoi(argv[1]);
-        max_buf_size = atoi(argv[2]);
+
+    pthread_t producers[NUM_PRODUCERS], consumers[NUM_CONSUMERS];
+    int producer_ids[NUM_PRODUCERS], consumer_ids[NUM_CONSUMERS];
+
+    buffer = (int*)malloc(sizeof(int) * BUFFER_SIZE);
+
+    // Create producer threads
+    for (int i = 0; i < NUM_PRODUCERS; i++) {
+        producer_ids[i] = i;
+        pthread_create(&producers[i], NULL, produce_requests_loop, &producer_ids[i]);
     }
-    BUFFER_SIZE = max_buf_size;
 
+    // Create consumer threads
+    for (int i = 0; i < NUM_CONSUMERS; i++) {
+        consumer_ids[i] = i;
+        pthread_create(&consumers[i], NULL, consume_requests_loop, &consumer_ids[i]);
+    }
 
-    buffer = (int *)malloc (sizeof(int) * max_buf_size);
-
-    //create master producer threads
-    master_t./test-master-worker.sh 100 100 100 100hread_ids = (int *)malloc(sizeof(int) * num_masters);
-    master_threads = (pthread_t *)malloc(sizeof(pthread_t) * num_masters);
-    for (i = 0; i < num_masters; i++)
-        master_thread_ids[i] = i;
-
-    for (i = 0; i < num_masters; i++)
-        pthread_create(&master_threads[i], NULL, generate_requests_loop, (void *)&master_thread_ids[i]);
-
-    //create worker consumer threads
-    consumer_thread_ids = (int *)malloc(sizeof(int) * num_workers);
-    consumer_threads = (pthread_t *)malloc(sizeof(pthread_t) * num_workers);
-    for (i = 0; i < num_workers; i++)
-        consumer_thread_ids[i] = i;
-
-    for (i = 0; i < num_workers; i++)
-        pthread_create(&consumer_threads[i], NULL, consumer_request_loop, (void *)&consumer_thread_ids[i]);
-
-
-    //wait for all threads to complete
-    for (i = 0; i < num_masters; i++)
-    {
-        pthread_join(master_threads[i], NULL);
+    // Join producer threads
+    for (int i = 0; i < NUM_PRODUCERS; i++) {
+        pthread_join(producers[i], NULL);
         printf("master %d joined\n", i);
     }
 
-    // wait for all worker threads to complete
-    for (i = 0; i < num_workers; i++)
-    {
-        pthread_join(consumer_threads[i], NULL);
-        printf("consumer %d joined\n", i);
+    // Join consumer threads
+    for (int i = 0; i < NUM_CONSUMERS; i++) {
+        pthread_join(consumers[i], NULL);
+        printf("worker %d joined\n", i);
     }
+
 
     /*----Deallocating Buffers---------------------*/
     free(buffer);
-    free(master_thread_ids);
-    free(master_threads);
-    free(consumer_thread_ids);
-    free(consumer_threads);
-
+    pthread_mutex_destroy(&mutex);
+    pthread_cond_destroy(&not_empty);
+    pthread_cond_destroy(&not_full);
     return 0;
 }
